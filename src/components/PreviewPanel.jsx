@@ -3,9 +3,7 @@ import { Eye } from "lucide-react";
 
 export default function PreviewPanel({ modifiedSVG, fileName }) {
 
-  const svgDataUrl = modifiedSVG
-    ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(modifiedSVG)}`
-    : null;
+  const svgDataUrl = modifiedSVG ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(modifiedSVG)}` : null;
 
   return (
     <section className="flex flex-col h-full bg-ink-950">
@@ -30,24 +28,14 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
       </div>
 
       <div className="flex-1 overflow-auto relative">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px)
-            `,
-            backgroundSize: "24px 24px",
-          }}
-        />
+        <div className="absolute inset-0 opacity-30 grid-bg"/>
 
-        <div className="relative flex items-center justify-center min-h-full p-8">
+        <div className=" flex items-center justify-center min-h-full p-8 ">
           {svgDataUrl ? (
             <div
-              className="animate-fade-in relative group">
-              <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-neon-cyan/10 to-neon-purple/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              className="animate-fade-in  group bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 glow-cyan">
 
-              <div className="relative rounded-xl overflow-hidden border border-ink-700/50 shadow-2xl bg-white">
+              <div className=" overflow-hidden rounded-sm border border-ink-700/50 shadow-2xl bg-white">
                 <img
                   src={svgDataUrl}
                   alt="SVG Preview"

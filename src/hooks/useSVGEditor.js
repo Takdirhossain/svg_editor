@@ -10,24 +10,20 @@ import {
 
 const INITIAL_FIELDS = { name: "", title: "", description: "" };
 
-
 export function useSVGEditor() {
-  const [originalSVG, setOriginalSVG] = useState(null);  
+  const [originalSVG, setOriginalSVG] = useState(null);
   const [fileName, setFileName] = useState("");
   const [fields, setFields] = useState(INITIAL_FIELDS);
   const [uploadError, setUploadError] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [downloadFormat, setDownloadFormat] = useState("svg"); 
+  const [downloadFormat, setDownloadFormat] = useState("svg");
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [detectedPlaceHoldersList, setDetectedPlaceHoldersList] = useState([]);
-
 
   const modifiedSVG = useMemo(() => {
     if (!originalSVG) return null;
     return replacePlaceholders(originalSVG, fields);
   }, [originalSVG, fields]);
-
-
 
   const handleFileUpload = useCallback(async (file) => {
     setUploadError(null);
@@ -42,17 +38,17 @@ export function useSVGEditor() {
     try {
       const content = await readFileAsText(file);
       const { valid, message } = validateSVG(content);
-    
+
       if (!valid) {
         setUploadError(message);
         return;
       }
-       const { normalArray, error } = detectPlaceholders(content);
-    if (error) {
-      setUploadError(error);
-      return;
-    }
- setDetectedPlaceHoldersList(normalArray);
+      const { normalArray, error } = detectPlaceholders(content);
+      if (error) {
+        setUploadError(error);
+        return;
+      }
+      setDetectedPlaceHoldersList(normalArray);
       setOriginalSVG(content);
       setFileName(file.name);
     } catch (err) {

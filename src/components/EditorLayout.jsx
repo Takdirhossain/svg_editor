@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LeftPanel from "./LeftPanel";
 import PreviewPanel from "./PreviewPanel";
+import { Menu, X } from "lucide-react";
 
 export default function EditorLayout({
   detectedPlaceHoldersList,
@@ -33,19 +34,11 @@ export default function EditorLayout({
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-xs font-mono text-ink-500 hidden sm:block">
-            {fileName}
-          </span>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/20">
-            <div className="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse" />
-            <span className="text-xs font-mono text-neon-cyan">editing</span>
-          </div>
-
           <button
             className="sm:hidden p-2 rounded-md bg-ink-700 text-white"
             onClick={() => setSidebarOpen(true)}
           >
-            ⋮
+           <Menu/>
           </button>
         </div>
       </header>
@@ -75,10 +68,7 @@ export default function EditorLayout({
 
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 flex sm:hidden">
-          <div
-            className="absolute inset-0 bg-black/50"
-            onClick={() => setSidebarOpen(false)}
-          />
+          
 
           <div
             className={`relative w-screen h-screen bg-ink-800 transform transition-transform duration-300 ease-in-out ${
@@ -89,9 +79,9 @@ export default function EditorLayout({
               className="absolute top-4 right-4 p-2 rounded-md bg-ink-700 text-white"
               onClick={() => setSidebarOpen(false)}
             >
-              ✕
+             <X/>
             </button>
-            <div className="p-4 h-full overflow-y-auto">
+            <div className="p-4 pt-10 h-full overflow-y-auto bg-zinc-900">
               <LeftPanel
                 detectedPlaceHoldersList={detectedPlaceHoldersList}
                 fileName={fileName}

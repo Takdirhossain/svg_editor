@@ -2,18 +2,7 @@ import { Check, Download, File, LoaderCircle } from "lucide-react";
 import FieldInput from "./FieldInput";
 
 
-export default function LeftPanel({
-  detectedPlaceHoldersList,
-  fileName,
-  fields,
-  onFieldChange,
-  downloadFormat,
-  onDownloadFormatChange,
-  onDownload,
-  isDownloading,
-  downloadSuccess,
-  onReset,
-}) {
+export default function LeftPanel({ detectedPlaceHoldersList, fileName, fields, onFieldChange, downloadFormat, onDownloadFormatChange, onDownload, isDownloading, downloadSuccess, onReset}) {
 
   const FIELD_CONFIG = [
     {
@@ -48,16 +37,14 @@ export default function LeftPanel({
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
 
-            <h2 className="font-display text-sm font-semibold text-white tracking-tight">
-              Editor
-            </h2>
+            <h2 className="font-display text-sm font-semibold text-white tracking-tight">Editor</h2>
           </div>
           <button
             onClick={onReset}
             className=" cursor-pointer flex items-center gap-1.5 border border-neon-cyan/20 px-2 py-1 rounded-lg text-xs font-mono text-ink-500 hover:text-neon-cyan transition-colors group"
             title="Upload new file"
           >
-            <LoaderCircle className="group-hover:rotate-180 transition-transform duration-300" width={18}/>
+            <LoaderCircle className="group-hover:rotate-180 transition-transform duration-300" width={18} />
             New file
           </button>
         </div>
@@ -71,19 +58,12 @@ export default function LeftPanel({
             SVG
           </span>
         </div>
-
-
-
       </div>
 
-      <div className="flex-1 overflow-y-auto px-6 py-5 space-y-5">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent to-ink-700" />
-          <span className="text-xs font-mono text-ink-500 uppercase tracking-widest">
-            Replacements
-          </span>
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent to-ink-700" />
-        </div>
+      <div className="flex-1 overflow-y-auto px-6 py-2 space-y-5">
+        <span className="text-xs font-mono  text-ink-500 uppercase tracking-widest">
+          Replacements
+        </span>
 
 
         {FIELD_CONFIG.filter(config =>
@@ -115,7 +95,7 @@ export default function LeftPanel({
                 className={`
                   flex-1 text-xs font-mono py-1.5 rounded-md transition-all duration-200
                   ${downloadFormat === fmt
-                    ? "bg-neon-cyan/20 text-neon-cyan border border-neon-cyan/30 shadow-[0_0_10px_rgba(0,229,255,0.1)]"
+                    ? "bg-blue-800 text-neon-cyan border border-neon-cyan/30 shadow-[0_0_10px_rgba(0,229,255,0.1)]"
                     : "text-ink-400 hover:text-ink-200"
                   }
                 `}
@@ -130,9 +110,9 @@ export default function LeftPanel({
           onClick={onDownload}
           disabled={isDownloading}
           className={`
-            relative w-full py-3.5 rounded-xl font-display font-semibold text-sm
+            relative w-full py-3.5 rounded-xl  font-display font-semibold text-sm
             flex items-center justify-center gap-2.5 overflow-hidden
-            transition-all duration-300
+            transition-all duration-300 bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 glow-cyan
             ${downloadSuccess
               ? "bg-neon-green/20 border border-neon-green/40 text-neon-green shadow-[0_0_20px_rgba(57,255,126,0.2)]"
               : isDownloading
@@ -141,24 +121,22 @@ export default function LeftPanel({
             }
           `}
         >
-          {!isDownloading && !downloadSuccess && (
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-700 pointer-events-none" />
-          )}
-
           {downloadSuccess ? (
             <>
-              <Check />
+
               Downloaded!
             </>
           ) : isDownloading ? (
             <>
-              <LoaderCircle />
+
               Generating...
             </>
           ) : (
             <>
-              <Download />
-              Download .{downloadFormat.toUpperCase()}
+              <span className="shimmer-text" >
+
+                Download .{downloadFormat.toUpperCase()}
+              </span>
             </>
           )}
         </button>

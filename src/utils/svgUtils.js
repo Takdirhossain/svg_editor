@@ -31,13 +31,11 @@ export function validateSVG(content) {
 
 export function replacePlaceholders(svgContent, values) {
   if (!svgContent) return "";
-
   let modified = svgContent;
-
   const replacements = {
-    "{{name}}": values.name ? values.name : "{{name}}",
-    "{{title}}": values.title ? values.title : "{{title}}",
-    "{{description}}": values.description ? values.description : "{{description}}",
+    "{{name}}": values.name || "{{name}}",
+    "{{title}}": values.title || "{{title}}",
+    "{{description}}": values.description || "{{description}}",
   };
 
   Object.entries(replacements).forEach(([placeholder, value]) => {
@@ -55,11 +53,9 @@ export function detectPlaceholders(svgContent) {
   const detected = PLACEHOLDERS.filter((p) => svgContent.includes(p));
   const normalArray = detected.map(p => p.replace("{{", "").replace("}}", ""));
  
-
   if (detected.length === 0) {
     return { detected: [], error: "No placeholders detected ({{name}}, {{title}}, {{description}})" };
   }
-
   return { normalArray, error: null };
 }
 

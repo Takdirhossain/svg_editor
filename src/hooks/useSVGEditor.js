@@ -1,12 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import {
-  validateSVG,
-  replacePlaceholders,
-  detectPlaceholders,
-  downloadFile,
-  downloadAsPNG,
-  readFileAsText,
-} from "../utils/svgUtils";
+import { validateSVG, replacePlaceholders, detectPlaceholders, downloadFile, downloadAsPNG, readFileAsText } from "../utils/svgUtils";
 
 const INITIAL_FIELDS = { name: "", title: "", description: "" };
 

@@ -5,17 +5,11 @@ export default function FieldInput({ id, label, placeholder, value, onChange, ic
   return (
     <div className="group space-y-1.5">
       <div className="flex items-center justify-between">
-        <label
-          htmlFor={id}
-          className="flex items-center gap-2 text-xs font-mono font-medium tracking-widest text-ink-400 uppercase"
-        >
-          {icon && <span className="text-sm">{icon}</span>}
-          {label}
+        <label htmlFor={id} className="flex items-center gap-2 text-xs font-mono font-medium tracking-widest text-ink-400 uppercase">
+          {icon && <span className="text-sm">{icon}</span>} {label}
         </label>
         {hint && (
-          <span className="text-xs font-mono text-ink-600 bg-ink-800  px-2 py-0.5 rounded">
-            {hint}
-          </span>
+          <span className="text-xs font-mono text-ink-600 bg-ink-800  px-2 py-0.5 rounded"> {hint} </span>
         )}
       </div>
 
@@ -40,9 +34,7 @@ export default function FieldInput({ id, label, placeholder, value, onChange, ic
         />
 
         {multiline && value.length > 0 && (
-          <span className="absolute bottom-3 right-3 text-xs font-mono text-ink-600">
-            {value.length}
-          </span>
+          <span className="absolute bottom-3 right-3 text-xs font-mono text-ink-600">  {value.length} </span>
         )}
 
         {value.length > 0 && !multiline && (

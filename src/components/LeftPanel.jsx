@@ -8,11 +8,12 @@ import { useEffect } from "react";
 export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFormat, isDownloading, downloadSuccess, onFieldChange, onDownloadFormatChange, onDownload, onReset, onFileUpload, error, onErrorClear }) {
   const { inputRef, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
 
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-    }
-  }, [error]);
+useEffect(() => {
+  if (error) {
+    toast.error(error);
+    onErrorClear(); 
+  }
+}, [error]);
 
   const FIELD_CONFIG = [
     {
@@ -60,13 +61,7 @@ export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFo
               className=" cursor-pointer bg-blue-800 flex items-center gap-1.5 border border-neon-cyan/20 px-2 py-1 rounded-lg text-xs font-mono text-ink-500 hover:text-neon-cyan transition-colors group"
               title="Upload new file"
             >
-              <input
-                ref={inputRef}
-                type="file"
-                accept=".svg,image/svg+xml"
-                className="hidden"
-                onChange={handleInputChange}
-              />
+              <input ref={inputRef}  type="file" accept=".svg,image/svg+xml"  className="hidden" onChange={handleInputChange}/>
               <FilePlusCorner width={18} />
               New file
             </button>
@@ -77,9 +72,7 @@ export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFo
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-2 space-y-5">
-        <h6 className="text-xs font-mono mt-3 text-ink-500 uppercase tracking-widest">
-          Available Replacements:
-        </h6>
+        <h6 className="text-xs font-mono mt-3 text-ink-500 uppercase tracking-widest">Available Replacements:</h6>
 
         {FIELD_CONFIG.filter(config =>
           detectedPlaceHoldersList.includes(config.key)
@@ -104,9 +97,7 @@ export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFo
           <span className="text-xs font-mono text-ink-500 shrink-0">Format:</span>
           <div className="flex bg-ink-800 border border-zinc-700 rounded-lg p-0.5 gap-0.5 flex-1">
             {["svg", "png"].map((fmt) => (
-              <button
-                key={fmt}
-                onClick={() => onDownloadFormatChange(fmt)}
+              <button key={fmt} onClick={() => onDownloadFormatChange(fmt)}
                 className={`
                   flex-1 text-xs font-mono py-1.5 rounded-md transition-all duration-200
                   ${downloadFormat === fmt
@@ -121,9 +112,7 @@ export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFo
           </div>
         </div>
 
-        <button
-          onClick={onDownload}
-          disabled={isDownloading}
+        <button onClick={onDownload} disabled={isDownloading}
           className={`
             relative w-full py-3.5 rounded-xl  font-display font-semibold text-sm
             flex items-center justify-center gap-2.5 overflow-hidden
@@ -138,18 +127,15 @@ export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFo
         >
           {downloadSuccess ? (
             <>
-
               Downloaded!
             </>
           ) : isDownloading ? (
             <>
-
               Generating...
             </>
           ) : (
             <>
               <span className="shimmer-text" >
-
                 Download .{downloadFormat.toUpperCase()}
               </span>
             </>

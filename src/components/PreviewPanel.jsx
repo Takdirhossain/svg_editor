@@ -1,28 +1,21 @@
-import { Eye } from "lucide-react";
+import { CornerUpLeft, Eye } from "lucide-react";
 
 
-export default function PreviewPanel({ modifiedSVG, fileName }) {
-
+export default function PreviewPanel({ modifiedSVG, fileName, onReset }) {
   const svgDataUrl = modifiedSVG ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(modifiedSVG)}` : null;
 
   return (
     <section className="flex flex-col h-full bg-ink-950">
       <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-700 bg-ink-900/50 shrink-0">
         <div className="flex items-center gap-2.5">
-          <h2 className="font-display text-sm font-semibold text-white tracking-tight">
-            Preview
-          </h2>
+          <span className="text-xs font-mono text-ink-600"> {fileName || "No file loaded"} </span>
+          <span className="text-xs font-mono text-ink-600"> ({(modifiedSVG.length / 1024).toFixed(1)} KB)</span>
           <Eye />
         </div>
 
-        <div >
-          <span className="text-xs font-mono text-ink-600">
-            {fileName || "No file loaded"}
-          </span>
+        <div>
           {modifiedSVG && (
-            <span className="text-xs font-mono text-ink-600">
-              ({(modifiedSVG.length / 1024).toFixed(1)} KB)
-            </span>
+            <button className="flex items-center gap-2 text-sm border border-ink-700 px-3 py-1 rounded-md cursor-pointer" onClick={onReset} > Reset <CornerUpLeft width={16} /> </button>
           )}
         </div>
       </div>
@@ -32,16 +25,9 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
 
         <div className=" flex items-center justify-center min-h-full p-8 ">
           {svgDataUrl ? (
-            <div
-              className="animate-fade-in  group bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 glow-cyan">
-
+            <div className="animate-fade-in  group bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 glow-cyan">
               <div className=" overflow-hidden rounded-sm border border-ink-700/50 shadow-2xl bg-white">
-                <img
-                  src={svgDataUrl}
-                  alt="SVG Preview"
-                  className="block"
-
-                />
+                <img src={svgDataUrl} alt="SVG Preview"  className="block" />
               </div>
             </div>
           ) : (
@@ -49,7 +35,6 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
           )}
         </div>
       </div>
-
 
     </section>
   );

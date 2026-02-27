@@ -1,37 +1,8 @@
 import { Save, Upload } from "lucide-react";
-import { useState, useRef, useCallback } from "react";
+import { useFileUpload } from "../hooks/useFileUpload";
 
 export default function UploadZone({ onFileUpload, error, onErrorClear }) {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const inputRef = useRef(null);
-
-  const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    onErrorClear?.();
-    const file = e.dataTransfer.files?.[0];
-    if (file) onFileUpload(file);
-  },
-    [onFileUpload, onErrorClear]
-  );
-
-  const handleDragOver = useCallback((e) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  }, []);
-
-  const handleDragLeave = useCallback(() => {
-    setIsDragOver(false);
-  }, []);
-
-  const handleInputChange = useCallback((e) => {
-    onErrorClear?.();
-    const file = e.target.files?.[0];
-    if (file) onFileUpload(file);
-    e.target.value = "";
-  },
-    [onFileUpload, onErrorClear]
-  );
+const { isDragOver, inputRef, handleDrop, handleDragOver, handleDragLeave, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 py-12 " >
@@ -47,13 +18,13 @@ export default function UploadZone({ onFileUpload, error, onErrorClear }) {
         </div>
 
         <div className="flex gap-2 mt-1">
-          <span className="px-3 py-1 rounded-full text-xs font-mono bg-neon-cyan/10 text-neon-cyan border border-neon-cyan/20">
+          <span className="px-3 py-1 rounded-full text-xs font-mono bg-sky-800 text-neon-cyan border border-neon-cyan/20">
             Upload
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono bg-ink-700 text-ink-400 border border-ink-600">
+          <span className="px-3 py-1 rounded-full text-xs font-mono bg-[#b847ff] text-ink-400 border border-ink-600">
             Edit
           </span>
-          <span className="px-3 py-1 rounded-full text-xs font-mono bg-ink-700 text-ink-400 border border-ink-600">
+          <span className="px-3 py-1 rounded-full text-xs font-mono bg-[#0D1A63] text-ink-400 border border-ink-600">
             Download
           </span>
         </div>
@@ -102,7 +73,7 @@ export default function UploadZone({ onFileUpload, error, onErrorClear }) {
               </span>
             </p>
             <p className="text-ink-500 text-xs font-mono mt-1">
-              Supports .svg files with {"{{name}}"} {"{{title}}"} {"{{description}}"} placeholders
+              Supports ".svg" files with {"{{name}}"}, {"{{title}}"} and {"{{description}}"} placeholders
             </p>
           </div>
         </div>

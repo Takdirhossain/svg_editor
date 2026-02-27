@@ -3,19 +3,7 @@ import LeftPanel from "./LeftPanel";
 import PreviewPanel from "./PreviewPanel";
 import { Menu, X } from "lucide-react";
 
-export default function EditorLayout({
-  detectedPlaceHoldersList,
-  fileName,
-  fields,
-  modifiedSVG,
-  downloadFormat,
-  isDownloading,
-  downloadSuccess,
-  onFieldChange,
-  onDownloadFormatChange,
-  onDownload,
-  onReset,
-}) {
+export default function EditorLayout({ fileName, modifiedSVG}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -45,18 +33,7 @@ export default function EditorLayout({
 
       <main className="flex flex-1 overflow-hidden">
         <div className="hidden sm:flex w-80 xl:w-96 shrink-0 overflow-hidden flex-col">
-          <LeftPanel
-            detectedPlaceHoldersList={detectedPlaceHoldersList}
-            fileName={fileName}
-            fields={fields}
-            onFieldChange={onFieldChange}
-            downloadFormat={downloadFormat}
-            onDownloadFormatChange={onDownloadFormatChange}
-            onDownload={onDownload}
-            isDownloading={isDownloading}
-            downloadSuccess={downloadSuccess}
-            onReset={onReset}
-          />
+          <LeftPanel />
         </div>
 
         <div className="w-px bg-ink-700/50 shrink-0 hidden sm:block" />
@@ -68,8 +45,6 @@ export default function EditorLayout({
 
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 flex sm:hidden">
-          
-
           <div
             className={`relative w-screen h-screen bg-ink-800 transform transition-transform duration-300 ease-in-out ${
               sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -82,18 +57,7 @@ export default function EditorLayout({
              <X/>
             </button>
             <div className="p-4 pt-10 h-full overflow-y-auto bg-zinc-900">
-              <LeftPanel
-                detectedPlaceHoldersList={detectedPlaceHoldersList}
-                fileName={fileName}
-                fields={fields}
-                onFieldChange={onFieldChange}
-                downloadFormat={downloadFormat}
-                onDownloadFormatChange={onDownloadFormatChange}
-                onDownload={onDownload}
-                isDownloading={isDownloading}
-                downloadSuccess={downloadSuccess}
-                onReset={onReset}
-              />
+              <LeftPanel />
             </div>
           </div>
         </div>

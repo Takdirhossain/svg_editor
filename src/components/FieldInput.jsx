@@ -23,7 +23,7 @@ export default function FieldInput({
           {label}
         </label>
         {hint && (
-          <span className="text-xs font-mono text-ink-600 bg-ink-800 border border-ink-700 px-2 py-0.5 rounded">
+          <span className="text-xs font-mono text-ink-600 bg-ink-800  px-2 py-0.5 rounded">
             {hint}
           </span>
         )}

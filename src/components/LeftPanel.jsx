@@ -1,8 +1,20 @@
 import { Check, Download, File, LoaderCircle } from "lucide-react";
 import FieldInput from "./FieldInput";
+import { useFileUpload } from "../hooks/useFileUpload";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useSVGEditor } from "../hooks/useSVGEditor";
 
 
-export default function LeftPanel({ detectedPlaceHoldersList, fileName, fields, onFieldChange, downloadFormat, onDownloadFormatChange, onDownload, isDownloading, downloadSuccess, onReset}) {
+export default function LeftPanel() {
+  const {error, onFileUpload, onErrorClear, detectedPlaceHoldersList, downloadFormat, onDownload, onDownloadFormatChange} = useSVGEditor();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+const { inputRef, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
 
   const FIELD_CONFIG = [
     {
@@ -40,29 +52,33 @@ export default function LeftPanel({ detectedPlaceHoldersList, fileName, fields, 
             <h2 className="font-display text-sm font-semibold text-white tracking-tight">Editor</h2>
           </div>
           <button
-            onClick={onReset}
-            className=" cursor-pointer flex items-center gap-1.5 border border-neon-cyan/20 px-2 py-1 rounded-lg text-xs font-mono text-ink-500 hover:text-neon-cyan transition-colors group"
+         
+        onClick={() => inputRef.current?.click()}
+        role="button"
+        tabIndex={0}
+        aria-label="Upload SVG file"
+        onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
+           
+            className=" cursor-pointer bg-blue-800 flex items-center gap-1.5 border border-neon-cyan/20 px-2 py-1 rounded-lg text-xs font-mono text-ink-500 hover:text-neon-cyan transition-colors group"
             title="Upload new file"
           >
+                    <input
+          ref={inputRef}
+          type="file"
+          accept=".svg,image/svg+xml"
+          className="hidden"
+          onChange={handleInputChange}
+        />
             <LoaderCircle className="group-hover:rotate-180 transition-transform duration-300" width={18} />
             New file
           </button>
         </div>
 
-        <div className="mt-3 flex items-center gap-2 px-3 py-2 rounded-lg bg-ink-800 border border-ink-700">
-          <File />
-          <span className="text-xs font-mono text-neon-cyan truncate flex-1" title={fileName}>
-            {fileName}
-          </span>
-          <span className="shrink-0 text-xs font-mono text-ink-500 bg-ink-700 px-1.5 py-0.5 rounded">
-            SVG
-          </span>
-        </div>
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-2 space-y-5">
         <span className="text-xs font-mono  text-ink-500 uppercase tracking-widest">
-          Replacements
+         Available Replacements:
         </span>
 
 

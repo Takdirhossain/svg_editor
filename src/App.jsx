@@ -9,6 +9,8 @@ export default function App() {
   return (
     <>
       <div className="noise-overlay" aria-hidden="true" />
+
+
       {hasFile ? (
         <EditorLayout
           detectedPlaceHoldersList={detectedPlaceHoldersList}

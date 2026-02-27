@@ -6,6 +6,11 @@ export default function UploadZone({ onFileUpload, error, onErrorClear }) {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 py-12 " >
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-20 left-20 w-[300px] h-[300px] bg-[#00e5ff]/5 rounded-full blur-[100px] animate-float-slow" />
+        <div className="absolute bottom-10 right-20 w-[300px] h-[300px] bg-[#00e5ff]/5 rounded-full blur-[100px] animate-float-slow" />
+        <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-[#00e5ff]/5 rounded-full blur-[100px] animate-float-slow" />
+      </div>
       <h2 className="text-2xl font-bold text-center text-ink-800 text-center">Your Favorite </h2>
       <div className="mb-12 animate-fade-in text-center">
         <div className="inline-flex items-center gap-3 mb-4">
@@ -39,7 +44,7 @@ export default function UploadZone({ onFileUpload, error, onErrorClear }) {
       >
         <input ref={inputRef} type="file" accept=".svg,image/svg+xml" className="hidden" onChange={handleInputChange} />
         <div className="flex flex-col items-center justify-center gap-5 px-8 py-16 ">
-          <div className={`w-20 h-20 rounded-2xl flex items-center justify-center bg-gradient-to-br from-ink-700 to-ink-800 border border-ink-600 transition-all duration-300 shadow-[0_0_15px_rgba(0,229,255,0.15)] ${isDragOver ? "scale-110 border-neon-cyan/50 shadow-[0_0_35px_rgba(0,229,255,0.45)]" : "animate-float"}`}  >
+          <div className={`w-20 h-20 rounded-2xl flex items-center justify-center bg-[#191A2F] border border-zinc-700 transition-all duration-300 shadow-[0_0_15px_rgba(0,229,255,0.15)] ${isDragOver ? "scale-110 border-neon-cyan/50 shadow-[0_0_35px_rgba(0,229,255,0.45)]" : "animate-float"}`}  >
             <Upload />
           </div>
           <div className="text-center space-y-2">
@@ -50,7 +55,7 @@ export default function UploadZone({ onFileUpload, error, onErrorClear }) {
               or{" "}
               <span className="text-neon-cyan hover:text-white transition-colors cursor-pointer font-medium"> browse files </span>
             </p>
-            <p className="text-ink-500 text-xs font-mono mt-1"> Supports ".svg" files with {"{{name}}"}, {"{{title}}"} and {"{{description}}"} placeholders </p>
+            <p className="text-zinc-600 text-xs font-mono mt-1"> Supports ".svg" files with {"{{name}}"}, {"{{title}}"} and {"{{description}}"} placeholders </p>
           </div>
         </div>
 

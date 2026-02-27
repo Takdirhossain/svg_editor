@@ -7,7 +7,7 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
 
   return (
     <section className="flex flex-col h-full bg-ink-950">
-      <div className="flex items-center justify-between px-5 py-3 border-b border-ink-700/50 bg-ink-900/50 shrink-0">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-700 bg-ink-900/50 shrink-0">
         <div className="flex items-center gap-2.5">
           <h2 className="font-display text-sm font-semibold text-white tracking-tight">
             Preview
@@ -28,7 +28,7 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
       </div>
 
       <div className="flex-1 overflow-auto relative">
-        <div className="absolute inset-0 opacity-30 grid-bg"/>
+        <div className="absolute inset-0 opacity-30 grid-bg" />
 
         <div className=" flex items-center justify-center min-h-full p-8 ">
           {svgDataUrl ? (
@@ -40,7 +40,7 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
                   src={svgDataUrl}
                   alt="SVG Preview"
                   className="block"
-                  
+
                 />
               </div>
             </div>

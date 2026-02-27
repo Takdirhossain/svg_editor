@@ -1,20 +1,18 @@
-import { Check, Download, File, LoaderCircle } from "lucide-react";
+import { FilePlusCorner } from "lucide-react";
 import FieldInput from "./FieldInput";
 import { useFileUpload } from "../hooks/useFileUpload";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import { useSVGEditor } from "../hooks/useSVGEditor";
 
 
-export default function LeftPanel() {
-  const {error, onFileUpload, onErrorClear, detectedPlaceHoldersList, downloadFormat, onDownload, onDownloadFormatChange} = useSVGEditor();
+export default function LeftPanel({ detectedPlaceHoldersList, fields, downloadFormat, isDownloading, downloadSuccess, onFieldChange, onDownloadFormatChange, onDownload, onReset, onFileUpload, error, onErrorClear }) {
+  const { inputRef, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
 
   useEffect(() => {
     if (error) {
       toast.error(error);
     }
   }, [error]);
-const { inputRef, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
 
   const FIELD_CONFIG = [
     {
@@ -44,43 +42,44 @@ const { inputRef, handleInputChange } = useFileUpload(onFileUpload, onErrorClear
   ];
 
   return (
-    <aside className="flex flex-col h-full bg-ink-900/50 border-r border-ink-700/50">
-      <div className="px-6 pt-6 pb-4 border-b border-ink-700/50">
+    <aside className="flex flex-col h-full bg-ink-900/50 border-r border-zinc-800">
+      <div className="px-6 pt-6 pb-4 border-b border-zinc-800">
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
-
-            <h2 className="font-display text-sm font-semibold text-white tracking-tight">Editor</h2>
+             <span className="font-display text-md font-semibold tracking-tight">
+            SVG<span className="shimmer-text">Editor</span>
+          </span>
           </div>
-          <button
-         
-        onClick={() => inputRef.current?.click()}
-        role="button"
-        tabIndex={0}
-        aria-label="Upload SVG file"
-        onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
-           
-            className=" cursor-pointer bg-blue-800 flex items-center gap-1.5 border border-neon-cyan/20 px-2 py-1 rounded-lg text-xs font-mono text-ink-500 hover:text-neon-cyan transition-colors group"
-            title="Upload new file"
-          >
-                    <input
-          ref={inputRef}
-          type="file"
-          accept=".svg,image/svg+xml"
-          className="hidden"
-          onChange={handleInputChange}
-        />
-            <LoaderCircle className="group-hover:rotate-180 transition-transform duration-300" width={18} />
-            New file
-          </button>
+          <div className="bg-gradient-to-br from-neon-cyan/20 to-neon-purple/20 glow-cyan" >
+            <button
+              onClick={() => inputRef.current?.click()}
+              role="button"
+              tabIndex={0}
+              aria-label="Upload SVG file"
+              onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
+              className=" cursor-pointer bg-blue-800 flex items-center gap-1.5 border border-neon-cyan/20 px-2 py-1 rounded-lg text-xs font-mono text-ink-500 hover:text-neon-cyan transition-colors group"
+              title="Upload new file"
+            >
+              <input
+                ref={inputRef}
+                type="file"
+                accept=".svg,image/svg+xml"
+                className="hidden"
+                onChange={handleInputChange}
+              />
+              <FilePlusCorner width={18} />
+              New file
+            </button>
+          </div>
+
         </div>
 
       </div>
 
       <div className="flex-1 overflow-y-auto px-6 py-2 space-y-5">
-        <span className="text-xs font-mono  text-ink-500 uppercase tracking-widest">
-         Available Replacements:
-        </span>
-
+        <h6 className="text-xs font-mono mt-3 text-ink-500 uppercase tracking-widest">
+          Available Replacements:
+        </h6>
 
         {FIELD_CONFIG.filter(config =>
           detectedPlaceHoldersList.includes(config.key)
@@ -100,10 +99,10 @@ const { inputRef, handleInputChange } = useFileUpload(onFileUpload, onErrorClear
         ))}
       </div>
 
-      <div className="px-6 py-5 border-t border-ink-700/50 space-y-3">
+      <div className="px-6 py-5 border-t border-zinc-800 space-y-3">
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-ink-500 shrink-0">Format:</span>
-          <div className="flex bg-ink-800 border border-ink-700 rounded-lg p-0.5 gap-0.5 flex-1">
+          <div className="flex bg-ink-800 border border-zinc-700 rounded-lg p-0.5 gap-0.5 flex-1">
             {["svg", "png"].map((fmt) => (
               <button
                 key={fmt}

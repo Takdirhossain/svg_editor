@@ -1,15 +1,5 @@
 
-export default function FieldInput({
-  id,
-  label,
-  placeholder,
-  value,
-  onChange,
-  icon,
-  hint,
-  isActive = false,
-  multiline = false,
-}) {
+export default function FieldInput({ id, label, placeholder, value, onChange, icon, hint, isActive = false, multiline = false }) {
   const Tag = multiline ? "textarea" : "input";
 
   return (
@@ -37,7 +27,7 @@ export default function FieldInput({
           placeholder={placeholder}
           rows={multiline ? 3 : undefined}
           className={`
-            input-field w-full bg-ink-800/60 border rounded-xl px-4 py-3
+            input-field w-full bg-ink-800/60 border border-zinc-700 rounded-md px-4 py-3
             font-body text-sm text-white placeholder:text-ink-600
             transition-all duration-200
             resize-none

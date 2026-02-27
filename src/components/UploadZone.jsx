@@ -2,7 +2,7 @@ import { Save, Upload } from "lucide-react";
 import { useFileUpload } from "../hooks/useFileUpload";
 
 export default function UploadZone({ onFileUpload, error, onErrorClear }) {
-const { isDragOver, inputRef, handleDrop, handleDragOver, handleDragLeave, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
+  const { isDragOver, inputRef, handleDrop, handleDragOver, handleDragLeave, handleInputChange } = useFileUpload(onFileUpload, onErrorClear);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 py-12 " >

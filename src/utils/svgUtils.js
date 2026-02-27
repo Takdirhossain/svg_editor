@@ -35,9 +35,9 @@ export function replacePlaceholders(svgContent, values) {
   let modified = svgContent;
 
   const replacements = {
-    "{{name}}": values.name ?? "",
-    "{{title}}": values.title ?? "",
-    "{{description}}": values.description ?? "",
+    "{{name}}": values.name ? values.name : "{{name}}",
+    "{{title}}": values.title ? values.title : "{{title}}",
+    "{{description}}": values.description ? values.description : "{{description}}",
   };
 
   Object.entries(replacements).forEach(([placeholder, value]) => {

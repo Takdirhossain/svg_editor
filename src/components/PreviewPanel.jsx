@@ -1,5 +1,4 @@
 import { Eye } from "lucide-react";
-import React, { useState } from "react";
 
 
 export default function PreviewPanel({ modifiedSVG, fileName }) {
@@ -45,9 +44,7 @@ export default function PreviewPanel({ modifiedSVG, fileName }) {
         <div className="relative flex items-center justify-center min-h-full p-8">
           {svgDataUrl ? (
             <div
-              className="animate-fade-in relative group"
-             
-            >
+              className="animate-fade-in relative group">
               <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-neon-cyan/10 to-neon-purple/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative rounded-xl overflow-hidden border border-ink-700/50 shadow-2xl bg-white">
